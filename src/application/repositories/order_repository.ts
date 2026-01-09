@@ -5,6 +5,6 @@ export interface IOrderRepository {
   save: (params: Order) => {};
   findAll: () => {};
   findByTrackOrder: (params: OrderFindByTrackingNumberType) => {};
-  findById: (id: string) => {};
+  findById: (id: number) => {};
   update: (params: Order) => {};
 }

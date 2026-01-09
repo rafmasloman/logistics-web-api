@@ -1,6 +1,6 @@
 class Order {
   constructor(
-    public readonly id: string,
+    public readonly id: number,
     public readonly sender_name: string,
     public readonly recipent_name: string,
     public readonly origin: string,

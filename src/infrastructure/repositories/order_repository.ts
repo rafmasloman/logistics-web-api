@@ -50,7 +50,7 @@ class OrderRepository implements IOrderRepository {
     }
   }
 
-  async findById(id: string) {
+  async findById(id: number) {
     try {
       const query = {
         name: "query-get-order-detail",
