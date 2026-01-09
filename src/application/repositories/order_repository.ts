@@ -3,7 +3,7 @@ import Order from "../../domain/entity/order_entity";
 
 export interface IOrderRepository {
   save: (params: Order) => {};
-  getAllOrders: () => {};
+  findAll: () => {};
   findByTrackOrder: (params: OrderFindByTrackingNumberType) => {};
   findById: (id: string) => {};
   update: (params: Order) => {};

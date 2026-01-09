@@ -7,4 +7,5 @@ export interface IUserUsecase {
   createOrder: (params: OrderStoreType) => {};
   trackOrder: (params: OrderFindByTrackingNumberType) => {};
   updateOrder: (params: OrderStoreType) => {};
+  getAllOrders: () => {};
 }

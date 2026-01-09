@@ -33,7 +33,7 @@ class OrderRepository implements IOrderRepository {
     }
   }
 
-  async getAllOrders() {
+  async findAll() {
     try {
       const query = {
         name: "query-get-all-orders",
