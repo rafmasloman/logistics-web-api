@@ -12,6 +12,7 @@ export type OrderStoreType = {
   recipent_name: string;
   origin: string;
   destination: string;
+  status: string;
 };
 
 export type OrderFindByTrackingNumberType = {
