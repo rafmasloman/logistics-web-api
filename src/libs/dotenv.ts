@@ -1,8 +1,6 @@
 import dotenv from "dotenv";
 
-export const loadDotenv = () => {
-  return dotenv.config();
-};
+dotenv.config();
 
 export const ENV_NAME = {
   PORT: process.env.PORT,

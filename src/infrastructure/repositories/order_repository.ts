@@ -33,24 +33,32 @@ class OrderRepository implements IOrderRepository {
     }
   }
 
-  async findAll() {
+  async findAll(): Promise<Order[]> {
     try {
       const query = {
         name: "query-get-all-orders",
         text: "SELECT (sender_name, recipent_name, origin, destination, tracking_number, status) FROM orders",
       };
 
-      const exec = await this.db.query(query);
+      const { rows } = await this.db.query(query);
 
-      const results = exec.rows;
-
-      return results;
+      return rows.map((item) => {
+        return {
+          id: item.id,
+          destination: item.destination,
+          origin: item.origin,
+          recipent_name: item.recipent_name,
+          sender_name: item.sender_name,
+          status: item.status,
+          tracking_number: item.tracking_number,
+        };
+      });
     } catch (error) {
       throw error;
     }
   }
 
-  async findById(id: number) {
+  async findById(id?: number): Promise<Order> {
     try {
       const query = {
         name: "query-get-order-detail",
@@ -58,15 +66,25 @@ class OrderRepository implements IOrderRepository {
         values: [id],
       };
 
-      const exec = await this.db.query(query);
+      const { rows } = await this.db.query(query);
 
-      return exec;
+      return {
+        id: rows[0].id,
+        destination: rows[0].destination,
+        origin: rows[0].origin,
+        recipent_name: rows[0].recipent_name,
+        sender_name: rows[0].sender_name,
+        status: rows[0].status,
+        tracking_number: rows[0].tracking_number,
+      };
     } catch (error) {
       throw error;
     }
   }
 
-  async findByTrackOrder(params: OrderFindByTrackingNumberType) {
+  async findByTrackOrder(
+    params: OrderFindByTrackingNumberType
+  ): Promise<Order> {
     try {
       const query = {
         name: "query-get-order-detail",
@@ -74,9 +92,18 @@ class OrderRepository implements IOrderRepository {
         values: [params.tracking_number],
       };
 
-      const exec = await this.db.query(query);
+      const { rows } = await this.db.query(query);
 
-      return exec.rows[0];
+      const result = new Order(
+        rows[0].sender_name,
+        rows[0].recipent_name,
+        rows[0].origin,
+        rows[0].tracking_number,
+        rows[0].destination,
+        rows[0].status
+      );
+
+      return result;
     } catch (error) {
       throw error;
     }
@@ -106,12 +133,6 @@ class OrderRepository implements IOrderRepository {
       const exec = await this.db.query(query);
 
       console.log(`exec = ${exec}`);
-
-      const order = await this.findById(params.id);
-
-      if (order.rowCount !== 0) {
-        return order.rows[0];
-      }
     } catch (error) {
       throw error;
     }

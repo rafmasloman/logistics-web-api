@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 import { ENV_NAME } from "../libs/dotenv";
 
-const pool = new Pool({
+export const pool = new Pool({
   host: ENV_NAME.DB_HOST,
   user: ENV_NAME.DB_USER,
   password: ENV_NAME.DB_PASS,
