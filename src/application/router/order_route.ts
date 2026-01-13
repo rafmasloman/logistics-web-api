@@ -12,6 +12,10 @@ class OrderRoute {
 
   registerRoute() {
     this.router.get("/", this.orderController.getAllOrders);
+    this.router.get(
+      "/:tracking-number",
+      this.orderController.findByTrackingNumber
+    );
     this.router.post("/", this.orderController.createOrder);
   }
 }

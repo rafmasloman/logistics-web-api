@@ -8,6 +8,9 @@ class OrderController {
   constructor(orderUsecase: OrderUsecase) {
     this.orderUsecase = orderUsecase;
     this.getAllOrders = this.getAllOrders.bind(this);
+    this.findByTrackingNumber = this.findByTrackingNumber.bind(this);
+    this.cancelOrder = this.cancelOrder.bind(this);
+    this.createOrder = this.createOrder.bind(this);
   }
 
   async getAllOrders(req: Request, res: Response) {
